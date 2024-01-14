@@ -2,10 +2,11 @@ package db
 
 import (
 	"context"
-	"github.com/stretchr/testify/require"
 	"jomabank/util"
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/require"
 )
 
 func createRandomEntry(t *testing.T, account Account) Entry {
@@ -27,13 +28,12 @@ func createRandomEntry(t *testing.T, account Account) Entry {
 	return entry
 }
 
-func TestQueries_CreateEntry(t *testing.T) {
+func TestCreateEntry(t *testing.T) {
 	account := createRandomAccount(t)
 	createRandomEntry(t, account)
-
 }
 
-func TestQueries_GetEntry(t *testing.T) {
+func TestGetEntry(t *testing.T) {
 	account := createRandomAccount(t)
 	entry1 := createRandomEntry(t, account)
 	entry2, err := testQueries.GetEntry(context.Background(), entry1.ID)
@@ -46,7 +46,7 @@ func TestQueries_GetEntry(t *testing.T) {
 	require.WithinDuration(t, entry1.CreatedAt, entry2.CreatedAt, time.Second)
 }
 
-func TestQueries_ListEntries(t *testing.T) {
+func TestListEntries(t *testing.T) {
 	account := createRandomAccount(t)
 	for i := 0; i < 10; i++ {
 		createRandomEntry(t, account)
